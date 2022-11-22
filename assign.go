@@ -1,3 +1,4 @@
+// package
 package main
 
 import (
@@ -7,6 +8,7 @@ import (
 	"strings"
 )
 
+// Exporting the Blocklist struct
 type Block struct {
 	Nonce    int
 	Trans    string
@@ -14,11 +16,13 @@ type Block struct {
 	Hash     string
 }
 
+// Exporting the Function to Calculate Hash
 func CalculateHash1(hashh string) string {
 
 	return fmt.Sprintf("%x", sha256.Sum256([]byte(hashh)))
 }
 
+// Exporting the Function to Create a New Block
 func Newblock(n int, t string) *Block {
 	s := new(Block)
 	s.Nonce = n
@@ -27,10 +31,12 @@ func Newblock(n int, t string) *Block {
 	return s
 }
 
+// Exporting the Blocklist struct
 type Blocklist struct {
 	list []*Block
 }
 
+// Exporting the Function to Add theBlock
 func (ls *Blocklist) AddBlock(n int, t string) *Block {
 	st := Newblock(n, t)
 	var x = VerifyChain(ls)
@@ -43,6 +49,8 @@ func (ls *Blocklist) AddBlock(n int, t string) *Block {
 		return nil
 	}
 }
+
+// Exporting the Function to List the Blocks
 func ListBlocks(obj *Blocklist) {
 
 	var l = len(obj.list)
@@ -57,6 +65,7 @@ func ListBlocks(obj *Blocklist) {
 
 }
 
+// Exporting the Another Function to Calculate Hash
 func CalculateHash(stud *Blocklist) {
 	var l = len(stud.list)
 	for i := l - 1; i >= 0; i-- {
@@ -67,6 +76,8 @@ func CalculateHash(stud *Blocklist) {
 		}
 	}
 }
+
+// Exporting the Function to Get the String
 func (s *Block) GetString() string {
 
 	var r = ""
@@ -75,6 +86,7 @@ func (s *Block) GetString() string {
 	return r
 }
 
+// Exporting the Function to Verify the Chain
 func VerifyChain(stud *Blocklist) bool {
 	var st = ""
 	var l = len(stud.list)
@@ -90,6 +102,8 @@ func VerifyChain(stud *Blocklist) bool {
 	fmt.Println("Blockchain isValid")
 	return true
 }
+
+// Exporting the Function to Change the Block
 func ChangeBlock(stud *Blocklist, n int, t string) {
 	var l = len(stud.list)
 	for i := l - 1; i >= 0; i-- {
